@@ -4,40 +4,28 @@
     <title>Student Dashboard</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-
 <body>
-
 <div class="container">
-
     <h1>Student Dashboard</h1>
-
     <h3>
-🎓 Welcome Student
+Welcome Students!
 </h3>
-
 <p>
 Track placements, explore companies and apply for opportunities.
 </p>
-
-    <p>You have successfully logged in.</p>
-
-    <hr>
-
-    <h3>Available Companies</h3>
-
-    <ul style="list-style:none;">
-        <li>TCS</li>
-        <li>Infosys</li>
-        <li>Wipro</li>
-        <li>Accenture</li>
-    </ul>
-
-    <br><br>
-
-    <a href="/companies" class="btn">🏢 View Companies</a>
-    <a href="/" class="btn">🏠 Home</a>
-
+<p>You have successfully logged in.</p>
+<hr>
+<a href="/companies" class="btn">View Companies</a>
+<a href="/calendar" class="btn btn-warning">
+    Placement Calendar
+</a>
+<a href="/my_applications" class="btn btn-warning">
+    My Applications
+</a>
+<a href="/profile" class="btn btn-info">
+    My Profile
+</a>
+<a href="/" class="btn">Home</a>
 </div>
-
 </body>
 </html>

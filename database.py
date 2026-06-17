@@ -1,8 +1,11 @@
-import sqlite3
-
-conn = sqlite3.connect('placement.db')
+import mysql.connector
+conn = mysql.connector.connect(
+    host='localhost',
+    user='your_username',
+    password='your_password',
+    database='placement'
+)
 cursor = conn.cursor()
-
 # Students Table
 cursor.execute('''
 CREATE TABLE IF NOT EXISTS students (
@@ -14,7 +17,6 @@ CREATE TABLE IF NOT EXISTS students (
     password TEXT NOT NULL
 )
 ''')
-
 # Companies Table
 cursor.execute('''
 CREATE TABLE IF NOT EXISTS companies (
@@ -24,7 +26,6 @@ CREATE TABLE IF NOT EXISTS companies (
     eligibility REAL NOT NULL
 )
 ''')
-
 cursor.execute('''
 CREATE TABLE IF NOT EXISTS applications (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -32,8 +33,6 @@ CREATE TABLE IF NOT EXISTS applications (
     company_name TEXT NOT NULL
 )
 ''')
-
 conn.commit()
 conn.close()
-
 print("Database created successfully!")

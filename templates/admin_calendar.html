@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manage Calendar</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+    <h1>📅 Manage Placement Calendar</h1>
+    <a href="/admin_dashboard" class="btn">Dashboard</a>
+
+    <form method="POST" action="{% if event %}/admin/calendar/edit/{{ event[0] }}{% else %}/admin/calendar/add{% endif %}">
+        <div class="form-group">
+            <label for="company_name">Company Name</label>
+            <input type="text" id="company_name" name="company_name" value="{{ event[1] if event else '' }}" required>
+        </div>
+        <div class="form-group">
+            <label for="drive_date">Drive Date</label>
+            <input type="date" id="drive_date" name="drive_date" value="{{ event[2] if event else '' }}" required>
+        </div>
+        <div class="form-group">
+            <label for="venue">Venue</label>
+            <input type="text" id="venue" name="venue" value="{{ event[3] if event else '' }}" required>
+        </div>
+        <button type="submit" class="btn">{% if event %}Update Drive{% else %}Add Drive{% endif %}</button>
+    </form>
+
+    {% if events %}
+    <table class="table" style="margin-top: 30px;">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Company</th>
+                <th>Date</th>
+                <th>Venue</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for event in events %}
+            <tr>
+                <td>{{ event[0] }}</td>
+                <td>{{ event[1] }}</td>
+                <td>{{ event[2] }}</td>
+                <td>{{ event[3] }}</td>
+                <td>
+                    <a href="/admin/calendar/edit/{{ event[0] }}" class="btn">Edit</a>
+                    <a href="/admin/calendar/delete/{{ event[0] }}" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No drives added yet.</p>
+    {% endif %}
+</div>
+</body>
+</html>

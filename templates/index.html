@@ -4,48 +4,33 @@
     <title>Student Placement Management System</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-
 <body>
-
     <nav class="navbar">
-    <div class="logo">
-        Placement Portal
+        <div class="logo">
+            Placement Portal
+        </div>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/login">Login</a>
+            <a href="/register">Register</a>
+        </div>
+    </nav>
+    <div class="container">
+        <h1>Student Placement Management System</h1>
+        <p class="subtitle">
+            Start your career journey — Login to explore companies and apply 🚀
+        </p>
+        <!-- If NOT logged in -->
+        {% if not session.get('user') %}
+            <a href="/login" class="btn">Student Login</a>
+            <a href="/register" class="btn">Student Registration</a>
+
+        {% else %}
+            <!-- If logged in -->
+            <h3>Welcome, {{ session['user'] }}</h3>
+            <a href="/dashboard" class="btn">Go to Dashboard</a>
+            <a href="/logout" class="btn">Logout</a>
+        {% endif %}
     </div>
-
-    <div class="stats">
-
-    <div class="card">
-        <h2>500+</h2>
-        <p>Students Placed</p>
-    </div>
-
-    <div class="card">
-        <h2>50+</h2>
-        <p>Companies</p>
-    </div>
-
-    <div class="card">
-        <h2>95%</h2>
-        <p>Placement Rate</p>
-    </div>
-
-</div>
-</nav>
-
-<div class="container">
-
-    <h1>Student Placement Management System</h1>
-
-<p class="subtitle">
-    Connecting Students with Top Recruiters and Career Opportunities 🚀
-</p>
-
-    <a href="/login" class="btn">Student Login</a>
-    <a href="/register" class="btn">Student Registration</a>
-
-</div>
-<footer>
-    © 2025 Student Placement Management System
-</footer>
 </body>
 </html>

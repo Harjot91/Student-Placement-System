@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Applications</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container admin-table-container">
+    <div class="admin-page-header">
+        <h1>Applications</h1>
+        <a href="/admin_dashboard" class="btn">Dashboard</a>
+    </div>
+
+    <div class="table-wrapper">
+        <table class="table admin-applications-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Student Email</th>
+                    <th>Company</th>
+                    <th>Role</th>
+                    <th>Status</th>
+                    <th>Resume</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for app in applications %}
+                <tr>
+                    <td>{{ app[0] }}</td>
+                    <td>{{ app[1] }}</td>
+                    <td>{{ app[2] }}</td>
+                    <td>{{ app[3] }}</td>
+                    <td>
+                        {% if app[4] == 'accepted' %}
+                            <span class="status-badge accepted">Under Review</span>
+                        {% elif app[4] == 'rejected' %}
+                            <span class="status-badge rejected">Rejected</span>
+                        {% elif app[4] == 'pending' %}
+                            <span class="status-badge pending">Pending</span>
+                        {% elif app[4] == 'selected' %}
+                            <span class="status-badge selected">Shortlisted</span>
+                        {% else %}
+                            <span class="status-badge {{ app[4] }}">{{ app[4] }}</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if app[5] %}
+                            <a href="/admin/view_resume/{{ app[0] }}" class="resume-link" target="_blank" rel="noopener noreferrer">View Resume</a>
+                        {% else %}
+                            <span class="text-muted">No Resume</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <div class="action-group">
+                            <a href="/admin/update_status/{{ app[0] }}/accepted" class="btn btn-small">Under Review</a>
+                            <a href="/admin/update_status/{{ app[0] }}/rejected" class="btn btn-small btn-danger">Reject</a>
+                            <a href="/admin/update_status/{{ app[0] }}/selected" class="btn btn-small btn-info">Shortlisted</a>
+                            <a href="/admin/applications/delete/{{ app[0] }}" class="btn btn-small btn-danger" onclick="return confirm('Delete this application?')">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manage Companies</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+    <h1>Companies</h1>
+    <a href="/admin/companies/add" class="btn">Add Company</a>
+    <a href="/admin_dashboard" class="btn">Dashboard</a>
+    <table class="table">
+        <thead>
+            <tr><th>ID</th><th>Name</th><th>Role</th><th>Package</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+            {% for company in companies %}
+            <tr>
+                <td>{{ company[0] }}</td>
+                <td>{{ company[1] }}</td>
+                <td>{{ company[2] }}</td>
+                <td>{{ company[3] }}</td>
+                <td>
+                    <a href="/admin/companies/edit/{{ company[0] }}" class="btn">Edit</a>
+                    <a href="/admin/companies/delete/{{ company[0] }}" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

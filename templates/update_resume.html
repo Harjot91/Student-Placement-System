@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Resume</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #f4f6f9;
+        }
+        .resume-card {
+            max-width: 500px;
+            margin: 80px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+    </style>
+</head>
+<body>
+<div class="resume-card">
+    <h2>📄 Update Resume</h2>
+    <!-- IMPORTANT FIX: show form only if session exists -->
+    {% if session['user'] %}
+    <form method="POST" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label class="form-label">Choose New Resume</label>
+            <input type="file"
+                   name="resume"
+                   class="form-control"
+                   accept=".pdf,.doc,.docx"
+                   required>
+        </div>
+        <button type="submit" class="btn btn-success w-100">
+            Upload New Resume
+        </button>
+    </form>
+    {% else %}
+        <p class="text-danger text-center">
+            ❌ You are not logged in
+        </p>
+    {% endif %}
+    <a href="/dashboard" class="btn btn-secondary w-100 mt-3">
+        Back to Dashboard
+    </a>
+</div>
+</body>
+</html>
