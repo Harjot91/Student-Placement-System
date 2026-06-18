@@ -61,7 +61,7 @@ init_db()
 # Admin credentials (change before production)
 ADMIN_USER = "admin"
 ADMIN_PASS = "admin123"
-# --- Admin Panel Routes ---
+# Admin Panel Routes
 @app.route("/admin_login", methods=["GET", "POST"])
 def admin_login():
     if request.method == "POST":
